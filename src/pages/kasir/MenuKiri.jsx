@@ -5,7 +5,16 @@ import { Produk } from "../../utils/data";
 import { useState } from "react";
 
 export default function MenuKiri() {
+  const [search, setSearch] = useState("");
   const [active, setActive] = useState("Semua Produk");
+
+  const ProdukFilter = Produk.filter((item) => {
+    const filterSearch = item.nama.toLowerCase().includes(search.toLowerCase());
+    const filterKategori =
+      active === "Semua Produk" || item.kategori === active;
+    return filterSearch && filterKategori;
+  });
+  
   return (
     <>
       {/* kiri */}
@@ -26,10 +35,10 @@ export default function MenuKiri() {
           ))}
         </div>
 
-        <Search />
+        <Search search={search} setSearch={setSearch} />
 
         <div className="grid grid-cols-4 mt-5 gap-5">
-          {Produk.map((item) => (
+          {ProdukFilter.map((item) => (
             <CardProduk key={item.id} p={item} />
           ))}
         </div>
