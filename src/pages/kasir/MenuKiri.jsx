@@ -7,6 +7,16 @@ import { useState } from "react";
 export default function MenuKiri() {
   const [search, setSearch] = useState("");
   const [active, setActive] = useState("Semua Produk");
+  // const [currentPage, setCurrentpage] = useState(1);
+  // const produkPerPage = 8;
+
+  // const indexLastProduk = currentPage * produkPerPage;
+  // const indexFirtProduk = indexLastProduk - produkPerPage;
+
+  // const currentProduk = Produk.slice(
+  //   indexFirtProduk,
+  //   indexLastProduk
+  // );
 
   const ProdukFilter = Produk.filter((item) => {
     const filterSearch = item.nama.toLowerCase().includes(search.toLowerCase());

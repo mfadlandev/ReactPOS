@@ -1,4 +1,8 @@
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
+
 export default function CardProduk({p}) {
+  const {tambahCart} = useContext(CartContext);
 
   function formatRupiah(harga) {
   return harga.toLocaleString("id-ID", {
@@ -10,7 +14,7 @@ export default function CardProduk({p}) {
 
   return (
     <>
-      <div className="text-left rounded-3xl shadow-xl border border-black/20 p-3 hover:bg-gray-200 transition cursor-pointer">
+      <button onClick={() => tambahCart(p)} className="text-left rounded-3xl shadow-xl border border-black/20 p-3 hover:bg-gray-200 transition cursor-pointer">
         <div className="w-full h-40 rounded-2xl bg-gray-100 overflow-hidden mb-3">
           <img
             src={p.img}
@@ -31,7 +35,7 @@ export default function CardProduk({p}) {
 
           <span className="font-bold text-base">{formatRupiah(p.harga)}</span>
         </div>
-      </div>
+      </button>
     </>
   );
 }

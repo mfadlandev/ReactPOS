@@ -62,5 +62,5 @@ export const Produk = [
     stok: 18,
     harga: 22000,
     img: "/images/coffee.jpg"
-  }
+  },
 ];
