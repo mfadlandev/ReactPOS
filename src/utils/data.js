@@ -5,7 +5,7 @@ export const Produk = [
     kategori: "Coffee",
     stok: 10,
     harga: 12000,
-    img: "/images/coffee.jpg"
+    img: "/images/latte.jpg"
   },
   {
     id: 2,
@@ -21,7 +21,7 @@ export const Produk = [
     kategori: "Chocolate",
     stok: 12,
     harga: 16000,
-    img: "/images/coffee.jpg"
+    img: "/images/coklat.jpg"
   },
   {
     id: 4,
@@ -37,7 +37,7 @@ export const Produk = [
     kategori: "Bread",
     stok: 20,
     harga: 14000,
-    img: "/images/coffee.jpg"
+    img: "/images/bread.jpg"
   },
   {
     id: 6,
