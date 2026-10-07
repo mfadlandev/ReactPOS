@@ -1,7 +1,7 @@
 import { useState } from "react";
-import MenuPelanggan from "../../components/menuPelanggan";
+import MenuPelanggan from "../../components/MenuPelanggan";
 import TipeOrder from "../../components/TipeOrder";
-import Cart from "../../components/cart";
+import Cart from "../../components/Cart";
 import Detail from "../../components/Detail";
 import ButtonOrder from "../../components/ButtonOrder";
 
