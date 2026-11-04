@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useProducts } from "../../utils/ProductContext";
+import { useProducts } from "../../context/ProductContext";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";

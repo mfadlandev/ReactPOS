@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { useProducts } from "../../utils/ProductContext";
+import { useProducts } from "../../context/ProductContext";
 import toast from "react-hot-toast";
 
 export default function AdminDashboard() {

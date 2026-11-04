@@ -1,7 +1,7 @@
 
 import { createContext, useContext, useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import apiClient from "./apiClient";
+import apiClient from "../utils/apiClient";
 
 // Buat konteks
 const ProductContext = createContext();
@@ -12,7 +12,7 @@ export const ProductProvider = ({ children }) => {
   // PARAMETER PAGINATION DAN FILTER
   const [productParams, setProductParams] = useState({
     page: 1,
-    limit: 10,
+    limit: 5,
     category_id: "",
     keyword: "",
   });
@@ -20,7 +20,7 @@ export const ProductProvider = ({ children }) => {
   // GET PRODUCTS
   const getProducts = async ({
     page = 1,
-    limit = 10,
+    limit = 5,
     category_id = "",
     keyword = "",
   }) => {

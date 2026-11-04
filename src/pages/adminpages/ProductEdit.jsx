@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useProducts } from "../../utils/ProductContext";
+import { useProducts } from "../..//context/ProductContext";
 import toast from "react-hot-toast";
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
@@ -40,7 +40,7 @@ export default function ProductEdit() {
           img: res.img_url || null,
         });
       } catch (err) {
-        toast.error("Gagal memuat data produk.");
+        toast.error("Gagal memuat data produk.", err);
       }
     };
     fetchProduct();
