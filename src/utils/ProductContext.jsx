@@ -4,6 +4,19 @@ import apiClient from "./apiClient";
 // Buat konteks
 const ProductContext = createContext();
 export const ProductProvider = ({ children }) => {
+  //pagination
+  const getProducts = async ({
+    page = 1,
+    limit = 10,
+    category_id = "",
+    keyword = "",
+  }) => {
+    const res = await apiClient.get(
+      `/products?page=${page}&limit=${limit}&category_id=${category_id}&keyword=${keyword}`,
+    );
+    return res.data.data;
+  };
+
   const queryClient = useQueryClient();
   //GET ALL PRODUCTS
   const {
@@ -59,6 +72,11 @@ export const ProductProvider = ({ children }) => {
       queryClient.invalidateQueries(["products"]);
     },
   });
+
+  const getCategories = async () => {
+    const res = await apiClient.get("/categories");
+    return res.data;
+  };
   // Export PROVIDER
   return (
     <ProductContext.Provider
@@ -70,6 +88,7 @@ export const ProductProvider = ({ children }) => {
         addProduct,
         updateProduct,
         deleteProduct,
+        getCategories,
       }}
     >
       {children}
