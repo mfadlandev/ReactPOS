@@ -62,7 +62,7 @@ export default function AdminDashboard() {
       <h1 className="text-xl font-bold mb-4">Manajemen Produk</h1>
 
       <div className="mb-4">
-        <Link to="/admin/add-product" className="text-blue-600 hover:underline">
+        <Link to="/admin/add-product" className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
           Tambah Produk
         </Link>
       </div>

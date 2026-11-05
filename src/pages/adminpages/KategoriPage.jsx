@@ -1,52 +1,71 @@
-import Button from "../../components/Button";
+import { useQuery } from "@tanstack/react-query";
+import { useProducts } from "../../context/ProductContext";
 
-export default function KategoriPage() {
+export default function AdminDashboard() {
+  const { getCategories } = useProducts();
+
+  // GET CATEGORIES
+  const {
+    data: categories,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["categories"],
+    queryFn: getCategories,
+  });
+
+  if (isLoading) return <p>Loading kategori...</p>;
+  if (isError) return <p>Error loading categories.</p>;
+
   return (
-    <div>
-      <h1 className="text-2xl font-bold mb-10">Kategori</h1>
-      <div className="bg-white w-full h-auto rounded-2xl p-6">
-        <h1 className="text-2xl font-bold mb-5 border-b pb-5">
-          Daftar Kategori
-        </h1>
-        <table className="w-full table-fixed">
-          <thead>
-            <tr>
-              <th className="text-left pb-2 w-[40%]">Nama Kategori</th>
-              <th className="text-left pb-2 w-[40%]">Deskripsi</th>
-              <th className="text-center pb-2 w-[20%]">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Cofee</td>
-              <td>Jenis-Jenis Coffee</td>
-              <td className="text-center py-3">
-                <Button></Button>
-                <Button variant="delete"></Button>
-              </td>
-            </tr>
-            <tr>
-              <td>Bread</td>
-              <td>Jenis-Jenis Roti</td>
-              <td className="text-center py-3">
-                <Button></Button>
-                <Button variant="delete"></Button>
-              </td>
-            </tr>
-            <tr>
-              <td>Testing</td>
-              <td className=" wrap-break-word max-w-40">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Voluptates soluta facilis at voluptatem aperiam distinctio
-              </td>
-              <td className="text-center py-3">
-                <Button></Button>
-                <Button variant="delete"></Button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    <div className="p-4 bg-white rounded shadow">
+      <h1 className="text-xl font-bold mb-4">Manajemen Kategori</h1>
+
+      {/* TOMBOL TAMBAH */}
+      <div className="mb-4">
+        <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+          Tambah Kategori
+        </button>
       </div>
+
+      {/* TABEL KATEGORI */}
+      <table className="table-auto w-full border">
+        <thead>
+          <tr className="bg-gray-100 text-left">
+            <th className="p-2 border">No</th>
+            <th className="p-2 border">Nama Kategori</th>
+            <th className="p-2 border">Aksi</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {categories?.map((cat, index) => (
+            <tr key={cat.category_id}>
+              <td className="p-2 border">{index + 1}</td>
+
+              <td className="p-2 border">{cat.category}</td>
+
+              <td className="p-2 border space-x-2">
+                <button className="text-blue-600 hover:underline">
+                  Edit
+                </button>
+
+                <button className="text-red-600 hover:underline">
+                  Hapus
+                </button>
+              </td>
+            </tr>
+          ))}
+
+          {categories?.length === 0 && (
+            <tr>
+              <td colSpan="4" className="text-center p-4">
+                Kategori tidak ditemukan.
+              </td>
+            </tr>
+          )}
+        </tbody>
+      </table>
     </div>
   );
 }
