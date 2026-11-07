@@ -20,14 +20,30 @@ export default function MenuKiri() {
   });
 
   const [search, setSearch] = useState("");
-  const [active, setActive] = useState("Semua Produk");
+  const [category, setCategory] = useState("");
 
-  const ProdukFilter = products.filter((item) => {
-    const filterSearch = item.name.toLowerCase().includes(search.toLowerCase());
-    const filterKategori =
-      active === "Semua Produk" || item.category.name === active;
-    return filterSearch && filterKategori;
-  });
+  const handleCategory = (id, name) => {
+    setCategory(id);
+    setActive(name);
+
+    setProductParams({
+      ...productParams,
+      page: 1,
+      category_id: id,
+    });
+  };
+
+  const handleSearch = (value) => {
+    setSearch(value);
+
+    setProductParams({
+      ...productParams,
+      page: 1,
+      category_id: category,
+      keyword: value,
+    });
+  };
+  const [active, setActive] = useState("Semua Produk");
 
   return (
     <>
@@ -36,29 +52,29 @@ export default function MenuKiri() {
         <div className="flex flex-wrap gap-2 rounded-3xl shadow-xl border border-black/20 p-3 shrink-0">
           <Navbar
             active={active === "Semua Produk"}
-            onClick={() => setActive("Semua Produk")}
+            onClick={() => handleCategory("", "Semua Produk")}
           ></Navbar>
           {categories?.map((item) => (
             <Navbar
               key={item.category_id}
               active={active === item.category}
-              onClick={() => setActive(item.category)}
+              onClick={() => handleCategory(item.category_id, item.category)}
             >
               {item.category}
             </Navbar>
           ))}
         </div>
 
-        <Search search={search} setSearch={setSearch} />
+        <Search search={search} setSearch={handleSearch} />
 
         <div className="grid grid-cols-4 mt-5 gap-5">
-          {ProdukFilter.map((item) => (
+          {products.map((item) => (
             <CardProduk key={item.id} p={item} />
           ))}
         </div>
         <div className="flex justify-center items-center gap-3 mt-auto pt-6">
           <button
-            disabled={!pagination?.prev_page_url}
+            disabled={pagination?.current_page <= 1}
             onClick={() =>
               setProductParams({
                 ...productParams,
@@ -75,7 +91,7 @@ export default function MenuKiri() {
           </span>
 
           <button
-            disabled={!pagination?.next_page_url}
+            disabled={pagination?.current_page >= pagination?.last_page}
             onClick={() =>
               setProductParams({
                 ...productParams,
