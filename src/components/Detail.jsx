@@ -6,7 +6,7 @@ export default function Detail() {
 
   // Hitung subtotal
   const subtotal = cart.reduce(
-    (total, item) => total + item.harga * item.jumlah,
+    (total, item) => total + item.price * item.jumlah,
     0
   );
 

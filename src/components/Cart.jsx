@@ -15,11 +15,11 @@ export default function Cart() {
             {/* Nama & harga */}
             <div className="flex-1 min-w-0">
               <p className="text-sm font-bold truncate">
-                {item.nama}
+                {item.name}
               </p>
 
               <p className="text-xs text-gray-400">
-                Rp {item.harga.toLocaleString("id-ID")}
+                Rp {item.price.toLocaleString("id-ID")}
               </p>
             </div>
 
@@ -47,7 +47,7 @@ export default function Cart() {
             {/* Total */}
             <div className="text-right w-24">
               <p className="font-bold">
-                Rp {(item.harga * item.jumlah).toLocaleString("id-ID")}
+                Rp {(item.price * item.jumlah).toLocaleString("id-ID")}
               </p>
             </div>
           </div>
