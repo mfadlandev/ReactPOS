@@ -9,11 +9,15 @@ import ProdukPage from "./pages/adminpages/ProdukPage";
 import TransaksiPage from "./pages/adminpages/TransaksiPage";
 import ProductForm from "./pages/adminpages/ProductForm";
 import ProductEdit from "./pages/adminpages/ProductEdit";
+import LoginPage from "./pages/LoginPage";
+import LogoutPage from "./pages/LogoutPage";
 
 export default function App() {
   return (
     <>
       <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/logout" element={<LogoutPage />} />
         <Route path="/" element={<MainLayout />}>
           <Route index element={<KasirPages />}></Route>
         </Route>

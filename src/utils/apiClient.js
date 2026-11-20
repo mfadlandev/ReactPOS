@@ -1,12 +1,24 @@
 import axios from "axios";
-// const token = localStorage.getItem("token");
-const token = "1|I97vEp2pMrJmfTdaQEoZML2iFZZ0mKBNXK5akXksd2c3148a";
+
+// GANTI VALUE-NYA DENGAN LOKASI API ANDA
+export const API_BASE_URL = 'http://127.0.0.1:8000/api';
+export const API_TOKEN_LS_KEY = 'token';
+
 const apiClient = axios.create({
-  baseURL: "http://127.0.0.1:8000/api",
-  headers: {
-    "Content-Type": "application/json",
-    Accept: "application/json",
-    Authorization: "Bearer " + token,
-  },
+    baseURL: API_BASE_URL,
+    headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+    },
 });
+
+// load token secara realtime setiap request
+apiClient.interceptors.request.use(async (config) => {
+    const token = localStorage.getItem(API_TOKEN_LS_KEY);
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+});
+
 export default apiClient;

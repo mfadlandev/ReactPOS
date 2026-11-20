@@ -7,18 +7,21 @@ import CartProvider from "./context/CartContext.jsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
 import { ProductProvider } from "./context/ProductContext.jsx";
+import { AuthProvider } from "./context/AuthContext.jsx";
 
 const queryClient = new QueryClient();
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
-        <ProductProvider>
-          <CartProvider>
-            <App />
-            <Toaster position="top-right" reverseOrder={false} />
-          </CartProvider>
-        </ProductProvider>
+        <AuthProvider>
+          <ProductProvider>
+            <CartProvider>
+              <App />
+              <Toaster position="top-right" reverseOrder={false} />
+            </CartProvider>
+          </ProductProvider>
+        </AuthProvider>
       </QueryClientProvider>
     </BrowserRouter>
   </StrictMode>,
